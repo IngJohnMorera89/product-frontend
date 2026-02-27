@@ -1,0 +1,35 @@
+<main>
+  <h1>Catálogo de Productos</h1>
+
+  <!-- Barra de Busqueda -->
+  <div class="search-bar">
+    <input id="search-input" placeholder="Filtar por Nombre" />
+    <button (click)="(onSearch)">Buscar</button>
+  </div>
+
+  <!-- Listado de Productos -->
+  @if (products().length === 0) {
+    <div class="search-bar">
+      <p>No hay Productos con el Filtro aplicado</p>
+    </div>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of products(); track product.code) {
+          <tr>
+            <td class="right">{{ product.code | number: '1.2-2' }}</td>
+            <td>{{ product.name }}</td>
+            <td class="right">{{ product.price | currency: 'COP' : 'symbol-narrow' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</main>
