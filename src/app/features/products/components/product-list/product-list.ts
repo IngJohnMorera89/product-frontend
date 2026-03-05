@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Product } from '../../models/product';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
+import { WindowsService } from '../../../../shared/services/windows';
 
 @Component({
   selector: 'app-product-list',
@@ -9,21 +10,23 @@ import { CurrencyPipe, DecimalPipe } from '@angular/common';
   styleUrl: './product-list.css',
 })
 export class ProductList {
+  protected readonly windowService = inject(WindowsService);
+
   protected readonly products = signal<Product[]>([
     {
-      code: 100001.0001,
+      code: 100001,
       name: 'Computador',
       price: 2600000,
       imageUrl:
         'https://i5.walmartimages.com.mx/mg/gm/3pp/asr/abdf9b43-4a57-4e18-8627-9552e135d925.9f75fcaf168c32a34b27dd87d1b0e422.png',
     },
     {
-      code: 200001.321,
+      code: 200001,
       name: 'Mouse',
       price: 150000,
     },
     {
-      code: 300001.666666666,
+      code: 300001,
       name: 'Monitor',
       price: 750000,
     },
@@ -31,5 +34,9 @@ export class ProductList {
 
   onSearch() {
     this.products.set([]);
+  }
+
+  onEdit(product: Product) {
+    this.windowService.setActualWindow('detail');
   }
 }
