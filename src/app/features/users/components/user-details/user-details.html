@@ -1,0 +1,23 @@
+<main class="container">
+  <h1 class="text-center">Perfil del usuario</h1>
+
+  @if (user()) {
+    <div class="card shadow mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ user()?.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{ user()?.username }}</h6>
+        <p class="card-text">{{ user()?.email }}</p>
+        <p>
+          <span class="badge text-bg-secondary">{{ user()?.active ? 'Activo' : 'Inactivo' }}</span>
+        </p>
+        <a href="#" class="btn btn-primary" [routerLink]="['/users', user()?.username]"
+          >Ver detalle</a
+        >
+      </div>
+    </div>
+  } @else {
+    <div class="alert alert-danger" role="alert">
+      No hay informacion sobre el usuario consultado: {{ username() }}
+    </div>
+  }
+</main>

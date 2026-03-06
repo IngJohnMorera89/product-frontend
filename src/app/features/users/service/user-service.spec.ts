@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Windows } from './windows';
+import { UserService } from './user-service';
 
-describe('Windows', () => {
-  let service: Windows;
+describe('UserService', () => {
+  let service: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Windows);
+    service = TestBed.inject(UserService);
   });
 
   it('should be created', () => {

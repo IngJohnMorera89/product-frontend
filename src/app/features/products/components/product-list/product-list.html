@@ -27,13 +27,16 @@
       <tbody>
         @for (product of products(); track product.code) {
           <tr class="align-middle">
-            <td class="text-end">{{ product.code | number: '1.0-0' }}</td>
+            <td class="align-middle">{{ product.code }}</td>
             <td>{{ product.name }}</td>
-            <td class="text-end">{{ product.price | currency: 'COP' : 'symbol-narrow' }}</td>
+            <td class="align-middle">{{ product.price | currency: 'COP' : 'symbol-narrow' }}</td>
             <!-- pipes -->
             <td>
               <div class="row column-gap-2 px-2">
-                <button class="btn btn-secondary col" (click)="onEdit(product)">Editar</button>
+                <!-- <button class="btn btn-secondary col" (click)="onView(product)">Ver</button> -->
+                <button class="btn btn-secondary col" [routerLink]="['/products', product.code]">
+                  Ver
+                </button>
                 <button class="btn btn-danger col">Eliminar</button>
               </div>
             </td>

@@ -1,18 +1,22 @@
 <main class="container mt-4">
   <div class="my-5">
-    <button class="btn btn-info" (click)="onBack()"><- Volver</button>
+    <button class="btn btn-info" (click)="onBack()">Volver</button>
   </div>
   <h2 class="text-center mb-3">Detalle del producto</h2>
   <div class="card shadow row">
     <div class="row g-0">
       <div class="col-4 p-3 text-center">
-        <img class="img-fluid" [src]="product().imageUrl" [alt]="product().name" />
+        <img
+          class="img-fluid"
+          [src]="product()?.imageUrl ?? 'image/image-vacia.webp'"
+          [alt]="product()?.name"
+        />
       </div>
       <div class="col-8">
         <div class="card-body">
-          <h3 class="card-title">{{ product().name }}</h3>
-          <p class="card-text small">{{ product().description }}</p>
-          <h4 class="text-primary">{{ product().price | currency }}</h4>
+          <h3 class="card-title">{{ product()?.name }}</h3>
+          <p class="card-text small">{{ product()?.description }}</p>
+          <h4 class="text-primary">{{ product()?.price | currency }}</h4>
         </div>
       </div>
     </div>
