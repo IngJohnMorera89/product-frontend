@@ -1,7 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Product } from '../../models/product';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { WindowsService } from '../../../../shared/services/windows';
+import { ProductService } from '../../services/ProductService';
 
 @Component({
   selector: 'app-product-list',
@@ -9,28 +10,18 @@ import { WindowsService } from '../../../../shared/services/windows';
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
-export class ProductList {
+export class ProductList implements OnInit {
   protected readonly windowService = inject(WindowsService);
+  private readonly productService = inject(ProductService);
 
-  protected readonly products = signal<Product[]>([
-    {
-      code: 100001,
-      name: 'Computador',
-      price: 2600000,
-      imageUrl:
-        'https://i5.walmartimages.com.mx/mg/gm/3pp/asr/abdf9b43-4a57-4e18-8627-9552e135d925.9f75fcaf168c32a34b27dd87d1b0e422.png',
-    },
-    {
-      code: 200001,
-      name: 'Mouse',
-      price: 150000,
-    },
-    {
-      code: 300001,
-      name: 'Monitor',
-      price: 750000,
-    },
-  ]);
+  ngOnInit(): void {
+    this.loadProducts();
+  }
+  protected readonly products = signal<Product[]>([]);
+  private loadProducts() {
+    const list = this.productService.getAllProducts();
+    this.products.set(list);
+  }
 
   onSearch() {
     this.products.set([]);

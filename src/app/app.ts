@@ -6,7 +6,7 @@ import { WindowsService } from './shared/services/windows';
 
 @Component({
   selector: 'app-root',
-  imports: [ProductList, ProductDetails],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
