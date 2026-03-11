@@ -3,6 +3,7 @@ import { ProductList } from './features/products/components/product-list/product
 import { ProductDetails } from './features/products/components/product-details/product-details';
 import { UserList } from './features/users/components/user-list/user-list';
 import { UserDetails } from './features/users/components/user-details/user-details';
+import { ProductCreate } from './features/products/components/product-create/product-create';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,10 @@ export const routes: Routes = [
   {
     path: 'products',
     component: ProductList,
+  },
+  {
+    path: 'products/new',
+    component: ProductCreate,
   },
 
   {
