@@ -1,0 +1,44 @@
+<main class="container">
+  <h2 class="mb-5 mt-4">Creación de Usuarios</h2>
+  <form [formGroup]="userForm" (submit)="onSubmit()">
+    <div class="row">
+      <div class="mb-4 col">
+        <label for="username" class="form-label">UserName</label>
+        <input type="text" formControlName="username" class="form-control" id="username" />
+      </div>
+      <div class="col">
+        <label for="inputPassword5" class="form-label">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          id="inputPassword5"
+          class="form-control"
+          aria-describedby="passwordHelpBlock"
+        />
+        <div id="passwordHelpBlock" class="form-text">
+          EL password debe tener minimo 8 caracteres, debe contener letras, numeros y caracteres
+          especiales.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 mt-4">
+      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="name@example.com"
+      />
+    </div>
+    <div class="mb-4">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" formControlName="name" class="form-control" id="name" />
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex center-content-md-end">
+      <button class="btn btn-primary me-md-2" type="submit">Crear</button>
+      <button class="btn btn-primary" type="reset">Cancelar</button>
+    </div>
+  </form>
+</main>

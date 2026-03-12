@@ -1,7 +1,11 @@
 <main class="container">
   <h1 class="text-center mb-5">Listado de usuarios</h1>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-3 g-4">
+  <div class="d-flex justify-content-end mt-4">
+    <button class="btn btn-primary" routerLink="/users/new">Crear Usuario</button>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-3 g-4 mt-4">
     @for (user of users(); track user.username) {
       <div class="col">
         <div class="card shadow">

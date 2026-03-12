@@ -4,6 +4,7 @@ import { ProductDetails } from './features/products/components/product-details/p
 import { UserList } from './features/users/components/user-list/user-list';
 import { UserDetails } from './features/users/components/user-details/user-details';
 import { ProductCreate } from './features/products/components/product-create/product-create';
+import { UsersCreate } from './features/users/components/users-create/users-create';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,11 @@ export const routes: Routes = [
   {
     path: 'users',
     component: UserList,
+  },
+
+  {
+    path: 'users/new',
+    component: UsersCreate,
   },
 
   {
