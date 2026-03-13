@@ -40,7 +40,9 @@
             <!-- pipes -->
             <td>
               <div class="row column-gap-2 px-2">
-                <!-- <button class="btn btn-secondary col" (click)="onView(product)">Ver</button> -->
+                <button class="btn btn-info col" [routerLink]="['/products/edit', product.code]">
+                  Editar
+                </button>
                 <button class="btn btn-secondary col" [routerLink]="['/products', product.code]">
                   Ver
                 </button>

@@ -53,6 +53,18 @@ export class ProductService {
     return item;
   }
 
+  updateProduct(code: number, item: Product): Product | undefined {
+    const product = this.getProductByCode(code);
+
+    if (product) {
+      product.name = item.name;
+      product.description = item.description;
+      product.price = item.price;
+      product.imageUrl = item.imageUrl;
+    }
+    return product;
+  }
+
   deleteProduct(code: number): void {
     this.products = this.products.filter((p) => p.code !== code);
   }

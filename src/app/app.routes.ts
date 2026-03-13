@@ -20,6 +20,10 @@ export const routes: Routes = [
     path: 'products/new',
     component: ProductCreate,
   },
+  {
+    path: 'products/edit/:code',
+    component: ProductCreate,
+  },
 
   {
     path: 'products/:code',
