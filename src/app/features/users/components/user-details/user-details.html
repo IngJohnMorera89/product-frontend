@@ -10,9 +10,6 @@
         <p>
           <span class="badge text-bg-secondary">{{ user()?.active ? 'Activo' : 'Inactivo' }}</span>
         </p>
-        <a href="#" class="btn btn-primary" [routerLink]="['/users', user()?.username]"
-          >Ver detalle</a
-        >
       </div>
     </div>
   } @else {

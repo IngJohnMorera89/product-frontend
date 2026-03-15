@@ -79,4 +79,8 @@ export class UserService {
   getByUsername(username: string) {
     return this.users().find((u) => u.username === username);
   }
+
+  delete(username: string): void {
+    this.users.update((uu) => uu.filter((u) => u.username !== username));
+  }
 }

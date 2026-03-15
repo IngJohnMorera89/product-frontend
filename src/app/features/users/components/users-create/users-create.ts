@@ -13,7 +13,7 @@ export class UsersCreate {
   protected userForm = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(5)]],
-    name: [0, [Validators.required, Validators.min(20)]],
+    name: ['', [Validators.required, Validators.min(20)]],
     email: ['', [Validators.required]],
   });
 

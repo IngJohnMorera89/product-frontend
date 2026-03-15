@@ -7,21 +7,11 @@
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-3 g-4 mt-4">
     @for (user of users(); track user.username) {
-      <div class="col">
-        <div class="card shadow">
-          <div class="card-body">
-            <h5 class="card-title">{{ user.name }}</h5>
-            <h6 class="card-subtitle mb-2 text-bodJohn Moy-secondary">{{ user.username }}</h6>
-            <p class="card-text">{{ user.email }}</p>
-            <p>
-              <span class="badge text-bg-secondary">{{ user.active ? 'Activo' : 'Inactivo' }}</span>
-            </p>
-            <a href="#" class="btn btn-primary" [routerLink]="['/users', user.username]"
-              >Ver detalle</a
-            >
-          </div>
-        </div>
-      </div>
+      <app-user-card
+        [info]="user"
+        (details)="showDetail($event)"
+        (remove)="removeUser($event)"
+      ></app-user-card>
     }
   </div>
 </main>
