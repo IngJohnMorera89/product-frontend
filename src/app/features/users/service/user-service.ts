@@ -80,6 +80,11 @@ export class UserService {
     return this.users().find((u) => u.username === username);
   }
 
+  create(user: User) {
+    this.users.update((uu) => [...uu, user]);
+    return user;
+  }
+
   delete(username: string): void {
     this.users.update((uu) => uu.filter((u) => u.username !== username));
   }
