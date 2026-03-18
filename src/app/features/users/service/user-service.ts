@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { User } from '../models/user';
+import { StorageService } from '../../../Shared/storageService';
 
 @Injectable({
   providedIn: 'root',
@@ -71,6 +72,10 @@ export class UserService {
       active: true,
     },
   ]);
+
+  constructor(private readonly storageService: StorageService) {
+    this.users.set(this.storageService.getUsers());
+  }
 
   getAll(): User[] {
     return this.users();

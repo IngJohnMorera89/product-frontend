@@ -1,10 +1,10 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+
 import { UserService } from '../../service/user-service';
 
 @Component({
   selector: 'app-user-details',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './user-details.html',
   styleUrl: './user-details.css',
 })
