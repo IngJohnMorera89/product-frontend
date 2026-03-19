@@ -20,7 +20,14 @@ export class ProductDetails implements OnInit {
   protected readonly product = signal<Product | undefined>(undefined);
 
   ngOnInit(): void {
-    this.product.set(this.producService.getProductByCode(this.codeNumber()));
+    this.producService.getProductByCode(this.codeNumber()).subscribe({
+      next: (product) => {
+        this.product.set(product);
+      },
+      error: (error) => {
+        console.error('Error al consultar el item', this.codeNumber());
+      },
+    });
   }
 
   onBack() {

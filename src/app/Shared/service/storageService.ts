@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../features/products/models/product';
-import { User } from '../features/users/models/user';
+import { Product } from '../../features/products/models/product';
+import { User } from '../../features/users/models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
   private readonly storage = localStorage;
+
   saveproducts(products: Product[]) {
     const key = 'products';
     const value = JSON.stringify(products);
@@ -17,22 +18,22 @@ export class StorageService {
     const key = 'products';
     const value = this.storage.getItem(key);
     if (value) {
-      return JSON.parse(value) as Product[];
+      return JSON.parse(value);
     }
     return [];
   }
 
   saveUsers(users: User[]) {
-    const key = 'users';
+    const key = 'usuarios';
     const value = JSON.stringify(users);
     this.storage.setItem(key, value);
   }
 
   getUsers(): User[] {
-    const key = 'users';
+    const key = 'usuarios';
     const value = this.storage.getItem(key);
     if (value) {
-      return JSON.parse(value) as User[];
+      return JSON.parse(value);
     }
     return [];
   }

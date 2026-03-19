@@ -1,5 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Product } from '../models/product';
+import { StorageService } from '../../../Shared/service/storageService';
+import { delay, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,54 +9,30 @@ import { Product } from '../models/product';
 export class ProductService {
   private products: Product[];
 
-  constructor() {
-    this.products = [
-      {
-        code: 100001,
-        name: 'Computador',
-        description:
-          'Los computadores HP, incluyendo portátiles (Notebook, Pavilion, ProBook) y de escritorio, ofrecen un rendimiento confiable, diseños modernos y alta portabilidad. Equipados con procesadores Intel Core o AMD Ryzen, suelen incluir pantallas FHD, almacenamiento rápido SSD y seguridad avanzada, ideales para trabajo, estudio y uso diario',
-        price: 2600000,
-        imageUrl:
-          'https://i5.walmartimages.com.mx/mg/gm/3pp/asr/abdf9b43-4a57-4e18-8627-9552e135d925.9f75fcaf168c32a34b27dd87d1b0e422.png',
-      },
-      {
-        code: 200001,
-        name: 'Mouse',
-        description:
-          'Dispositivo apuntador periférico que se conecta al ordenador sin cables físicos, utilizando tecnologías de radiofrecuencia (RF) mediante un receptor USB o tecnología Bluetooth para mayor libertad de movimiento. Funciona con baterías (pilas o recargables), reduciendo el desorden del escritorio y mejorando la ergonomía',
-        price: 150000,
-        imageUrl: '/image/mouse.webp',
-      },
-      {
-        code: 300001,
-        name: 'Monitor',
-        description:
-          'Pantalla diseñada con una curvatura cóncava que envuelve el campo visual del usuario. Su objetivo es ofrecer una experiencia inmersiva, reducir la fatiga ocular al mantener una distancia uniforme entre el ojo y la pantalla, y mejorar la visión periférica, siendo ideal para gaming, edición de video y multitarea. ',
-        price: 750000,
-        imageUrl: '/image/monitor.webp',
-      },
-    ];
+  constructor(private readonly storage: StorageService) {
+    this.products = storage.getProducts();
+    storage.saveproducts(this.products);
   }
 
-  getAllProducts(): Product[] {
-    return this.products;
+  getAllProducts(): Observable<Product[]> {
+    return of(this.products).pipe(delay(2000));
   }
-  getProductByCode(code: number): Product | undefined {
-    return this.products.find((p) => p.code === code);
+  getProductByCode(code: number): Observable<Product | undefined> {
+    return of(this.products.find((p) => p.code === code)).pipe(delay(2000));
   }
 
-  createProduct(item: Product): Product {
+  createProduct(item: Product): Observable<Product> {
     //agregar el producto al final de la lista.
 
     this.products = [...this.products, item];
+    this.saveAll();
 
     //retornar el producto.
-    return item;
+    return of(item).pipe(delay(2000));
   }
 
-  updateProduct(code: number, item: Product): Product | undefined {
-    const product = this.getProductByCode(code);
+  updateProduct(code: number, item: Product): Observable<Product | undefined> {
+    const product = this.products.find((p) => p.code === code);
 
     if (product) {
       product.name = item.name;
@@ -62,10 +40,18 @@ export class ProductService {
       product.price = item.price;
       product.imageUrl = item.imageUrl;
     }
-    return product;
+    this.saveAll();
+    return of(product).pipe(delay(2000));
   }
 
-  deleteProduct(code: number): void {
+  deleteProduct(code: number): Observable<void> {
     this.products = this.products.filter((p) => p.code !== code);
+    this.saveAll();
+
+    return of().pipe(delay(2000));
+  }
+
+  private saveAll(): void {
+    this.storage.saveproducts(this.products);
   }
 }

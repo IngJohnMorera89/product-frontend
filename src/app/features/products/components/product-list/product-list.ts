@@ -15,6 +15,8 @@ export class ProductList implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly router = inject(Router);
 
+  protected readonly loadning = signal(true);
+
   protected readonly searchText = signal('');
 
   private readonly allProducts = signal<Product[]>([]);
@@ -36,8 +38,17 @@ export class ProductList implements OnInit {
   }
 
   private loadProducts() {
-    const list = this.productService.getAllProducts();
-    this.allProducts.set(list);
+    this.loadning.set(true);
+    this.productService.getAllProducts().subscribe({
+      next: (data) => {
+        this.loadning.set(false);
+        this.allProducts.set(data);
+      },
+      error: (error) => {
+        this.loadning.set(false);
+        console.error('Ocurrió un error al Listar los productos', error);
+      },
+    });
   }
 
   onView(product: Product) {

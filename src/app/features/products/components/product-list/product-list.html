@@ -12,16 +12,20 @@
 
   <p>Texto de busqueda: {{ searchText() }}</p>
 
+  <div class="d-flex justify-content-end mb-2">
+    <button class="btn btn-primary" routerLink="/products/new">Nuevo Producto</button>
+  </div>
+
   <!-- Listado de productos -->
-  @if (products().length === 0) {
+  @if (loadning()) {
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  } @else if (products().length === 0) {
     <div class="alert alert-primary" role="alert">
       No hay productos disponibles con filtro aplicado.
     </div>
   } @else {
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-primary" routerLink="/products/new">Nuevo Producto</button>
-    </div>
-
     <table class="table table-striped table-hover">
       <thead>
         <tr>
