@@ -4,6 +4,8 @@ import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { ProductService } from '../../services/ProductService';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../services/cart.service';
+import { CartView } from '../cart-view/cart-view';
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +20,14 @@ export class ProductList implements OnInit {
   protected readonly loadning = signal(true);
 
   protected readonly searchText = signal('');
+
+  private cartService = inject(CartService) as any;
+
+  // Función para el botón
+  protected onAddToCart(product: Product) {
+    this.cartService.addToCart(product);
+    alert(`¡${product.name} agregado al carrito!`);
+  }
 
   private readonly allProducts = signal<Product[]>([]);
   protected readonly products = computed(() => {

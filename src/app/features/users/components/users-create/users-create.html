@@ -1,6 +1,9 @@
-<main class="container">
-  <h2 class="mb-5 mt-4">Creación de Usuarios</h2>
-  <form [formGroup]="userForm" (submit)="onSubmit()">
+<main class="users-create-page">
+  <div class="page-header">
+    <h2 class="page-title">Creación de Usuarios</h2>
+    <p class="page-subtitle">Registra tu cuenta con estilo oscuro y moderno.</p>
+  </div>
+  <form class="user-form" [formGroup]="userForm" (submit)="onSubmit()">
     <div class="row">
       <div class="mb-4 col">
         <label for="username" class="form-label">UserName</label>
@@ -38,7 +41,7 @@
 
     <div class="d-grid gap-2 d-md-flex center-content-md-end">
       <button class="btn btn-primary me-md-2" type="submit">Crear</button>
-      <button class="btn btn-primary" (click)="backTolist()">Cancelar</button>
+      <button class="btn btn-secondary" (click)="backToLogin()">Cancelar</button>
     </div>
   </form>
 </main>

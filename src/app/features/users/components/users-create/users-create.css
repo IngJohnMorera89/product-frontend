@@ -1,0 +1,70 @@
+.users-create-page {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #121b2f 0%, #101d39 45%, #141e45 100%);
+  padding: 40px 20px;
+  color: #ffffff;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00d4ff;
+}
+
+.page-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+}
+
+.user-form {
+  background: rgba(14, 23, 40, 0.92);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+  padding: 2rem;
+}
+
+.user-form .form-label {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.user-form .form-control {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #edf6ff;
+}
+
+.user-form .form-control:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.18);
+}
+
+.user-form .form-text {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.user-form .btn-primary,
+.user-form .btn-secondary {
+  border-radius: 12px;
+  padding: 0.9rem 1.5rem;
+}
+
+.user-form .btn-primary {
+  background: linear-gradient(90deg, #00d4ff 0%, #0099ff 100%);
+  border: none;
+}
+
+.user-form .btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.user-form .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

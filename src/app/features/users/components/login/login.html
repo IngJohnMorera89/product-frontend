@@ -1,0 +1,55 @@
+<div class="login-container d-flex align-items-center justify-content-center min-vh-100">
+  <div class="login-card card border-0 shadow-lg">
+    <div class="card-body p-5">
+      <div class="text-center mb-4">
+        <h2 class="card-title fw-bold text-white">Iniciar sesión</h2>
+        <p class="text-muted small">Accede a tu tienda virtual</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="username" class="form-label text-white">Usuario</label>
+          <input
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+            required
+            type="text"
+            class="form-control form-control-dark"
+            placeholder="Ingrese su usuario"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label text-white">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            class="form-control form-control-dark"
+            placeholder="Ingrese su contraseña"
+          />
+        </div>
+
+        <div *ngIf="error()" class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Error:</strong> {{ error() }}
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-gradient btn-lg fw-bold">Entrar</button>
+        </div>
+      </form>
+
+      <hr class="my-4 border-secondary" />
+
+      <div class="text-center">
+        <p class="text-muted mb-2">¿No tienes cuenta?</p>
+        <button (click)="goToRegister()" class="btn btn-outline-primary btn-sm">
+          Crear una aquí
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

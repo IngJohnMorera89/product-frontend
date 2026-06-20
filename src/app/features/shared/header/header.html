@@ -1,7 +1,8 @@
-<header class="container">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">TECH STORE JOHN</a>
+<header class="header-shell">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid header-inner">
+      <a class="navbar-brand fw-bold text-info" routerLink="/products">TECH STORE</a>
+
       <button
         class="navbar-toggler"
         type="button"
@@ -13,18 +14,36 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" routerLink="/products" routerLinkActive="active">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products">Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/users">Usuarios</a>
+            <a class="nav-link" routerLink="/users" routerLinkActive="active">Usuarios</a>
           </li>
         </ul>
+
+        <div class="header-right d-flex align-items-center gap-3">
+          <span class="user-chip text-white px-2">
+            Hola, {{ currentUser()?.name || currentUser()?.username }}
+          </span>
+
+          <a
+            routerLink="/cart"
+            class="text-white text-decoration-none d-flex align-items-center gap-2 cart-link"
+          >
+            🛒
+            <span
+              >Total: <strong>{{ totalCompra() | currency: 'COP' : 'symbol-narrow' }}</strong></span
+            >
+          </a>
+
+          <button class="btn btn-sm btn-outline-danger" type="button" (click)="logout()">
+            Cerrar sesión
+          </button>
+        </div>
       </div>
     </div>
   </nav>

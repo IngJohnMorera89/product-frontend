@@ -25,8 +25,12 @@ export class UsersCreate {
 
   onSubmit() {
     this.userService.create(this.userForm.value as User);
-    alert('Se ha guardado el usuario con éxito');
-    this.backTolist();
+    alert('Se ha guardado el usuario con éxito. Ahora puedes iniciar sesión.');
+    this.backToLogin();
+  }
+
+  backToLogin() {
+    this.router.navigateByUrl('/login');
   }
 
   backTolist() {

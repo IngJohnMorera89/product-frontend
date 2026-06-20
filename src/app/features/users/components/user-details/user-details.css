@@ -1,0 +1,45 @@
+.user-details-page {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #111827 0%, #0f1d39 55%, #132148 100%);
+  padding: 40px 20px;
+  color: #ffffff;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00d4ff;
+}
+
+.card {
+  background: rgba(16, 26, 42, 0.96);
+  border: 1px solid rgba(0, 212, 255, 0.14);
+  border-radius: 22px;
+}
+
+.card-body {
+  padding: 1.75rem;
+}
+
+.card-title {
+  color: #7af1ff;
+  margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.card-text,
+.badge {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}

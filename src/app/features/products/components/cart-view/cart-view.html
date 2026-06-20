@@ -1,0 +1,40 @@
+<main class="container mt-5">
+  <h2 class="text-info mb-4">Tu Carrito de Compras</h2>
+
+  @if (cartItems().length === 0) {
+    <div class="alert alert-dark text-center">
+      Tu carrito está vacío. <a routerLink="/products" class="text-info">Volver a la tienda</a>
+    </div>
+  } @else {
+    <div class="table-responsive">
+      <table class="table table-dark table-hover">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of cartItems(); track item.product.code) {
+            <tr>
+              <td class="align-middle">{{ item.product.name }}</td>
+              <td class="align-middle">{{ item.product.price | currency: 'COP' }}</td>
+              <td class="align-middle">{{ item.quantity }}</td>
+              <td class="align-middle fw-bold text-success">
+                {{ item.product.price * item.quantity | currency: 'COP' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-end align-items-center mt-4 gap-3">
+      <h3 class="text-white">Total: {{ total() | currency: 'COP' }}</h3>
+      <button class="btn btn-danger" (click)="clearCart()">Vaciar Carrito</button>
+      <button class="btn btn-success">Finalizar Compra</button>
+    </div>
+  }
+</main>

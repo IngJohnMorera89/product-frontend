@@ -1,14 +1,18 @@
-<div class="card shadow p-2">
+<div class="user-card card shadow p-3">
   <div class="card-body">
     <h5 class="card-title">{{ info().name }}</h5>
-    <h6 class="card-subtitle mb-2 text-bodJohn Moy-secondary">{{ info().username }}</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ info().username }}</h6>
     <p class="card-text">{{ info().email }}</p>
     <p>
       <span class="badge text-bg-secondary">{{ info().active ? 'Activo' : 'Inactivo' }}</span>
     </p>
     <div class="row column-gap-2 justify-content-end">
-      <a class="btn btn-outline-secondary btn-sm col-auto" (click)="onDetails()">Detalle</a>
-      <a class="btn btn-outline-daark btn-sm col-auto" (click)="onRemove()">Eliminar</a>
+      <button class="btn btn-outline-info btn-sm col-auto" type="button" (click)="onDetails()">
+        Detalle
+      </button>
+      <button class="btn btn-outline-danger btn-sm col-auto" type="button" (click)="onRemove()">
+        Eliminar
+      </button>
     </div>
   </div>
 </div>

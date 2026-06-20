@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.html',
+  styleUrl: './user-card.css',
 })
 export class UserCard {
   readonly info = input.required<User>();

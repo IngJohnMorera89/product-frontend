@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Product } from '../models/product';
 import { StorageService } from '../../../Shared/service/storageService';
-import { delay, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +15,10 @@ export class ProductService {
   }
 
   getAllProducts(): Observable<Product[]> {
-    return of(this.products).pipe(delay(2000));
+    return of(this.products);
   }
   getProductByCode(code: number): Observable<Product | undefined> {
-    return of(this.products.find((p) => p.code === code)).pipe(delay(2000));
+    return of(this.products.find((p) => p.code === code));
   }
 
   createProduct(item: Product): Observable<Product> {
@@ -28,7 +28,7 @@ export class ProductService {
     this.saveAll();
 
     //retornar el producto.
-    return of(item).pipe(delay(2000));
+    return of(item);
   }
 
   updateProduct(code: number, item: Product): Observable<Product | undefined> {
@@ -41,14 +41,14 @@ export class ProductService {
       product.imageUrl = item.imageUrl;
     }
     this.saveAll();
-    return of(product).pipe(delay(2000));
+    return of(product);
   }
 
   deleteProduct(code: number): Observable<void> {
     this.products = this.products.filter((p) => p.code !== code);
     this.saveAll();
 
-    return of().pipe(delay(2000));
+    return of(void 0);
   }
 
   private saveAll(): void {

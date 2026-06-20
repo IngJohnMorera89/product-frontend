@@ -1,4 +1,52 @@
+.product-details-page {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #111827 0%, #101c34 55%, #14214b 100%);
+  padding: 40px 20px;
+  color: #ffffff;
+}
+
+.back-action {
+  margin-bottom: 24px;
+}
+
+.btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #fff;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.card {
+  background: rgba(11, 20, 36, 0.95);
+  border: 1px solid rgba(0, 212, 255, 0.14);
+  border-radius: 24px;
+}
+
+.card-body {
+  padding: 1.75rem;
+}
+
+.card-title {
+  color: #00d4ff;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+}
+
+.text-primary {
+  color: #7ef2ff !important;
+}
+
 img {
-  max-width: 250px;
-  max-height: 250px;
+  max-width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
 }
