@@ -20,6 +20,12 @@ export class CartView {
     this.cartService.clearCart();
   }
 
+  onCheckout() {
+    if (this.cartItems().length === 0) return;
+
+    const totalCobrado = this.cartService.checkout();
+    alert(`¡Compra realizada con éxito! Total pagado: $${totalCobrado.toLocaleString()}`);
+  }
   removeFromCart(productCode: number) {
     // Aquí podrías agregar una función en tu servicio para remover un ítem
     // Por ahora, si quieres avanzar, el botón "Vaciar Carrito" que ya tienes es suficiente.

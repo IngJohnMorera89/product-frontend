@@ -1,46 +1,35 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Product } from '../../models/product';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { ProductService } from '../../services/ProductService';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
-import { CartView } from '../cart-view/cart-view';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CurrencyPipe, RouterLink, FormsModule],
+  standalone: true,
+  imports: [CurrencyPipe, FormsModule],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
 export class ProductList implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly router = inject(Router);
+  private readonly cartService = inject(CartService);
 
-  protected readonly loadning = signal(true);
-
+  protected readonly loading = signal(true);
   protected readonly searchText = signal('');
-
-  private cartService = inject(CartService) as any;
-
-  // Función para el botón
-  protected onAddToCart(product: Product) {
-    this.cartService.addToCart(product);
-    alert(`¡${product.name} agregado al carrito!`);
-  }
-
   private readonly allProducts = signal<Product[]>([]);
+
+  // Filtro de productos basado en el buscador
   protected readonly products = computed(() => {
-    if (this.searchText() === '') {
-      return this.allProducts();
-    } else {
-      return this.allProducts().filter(
-        (p) =>
-          p.name.toLowerCase().includes(this.searchText().toLowerCase()) ||
-          p.code.toString().includes(this.searchText()) ||
-          p.code.toString().includes(this.searchText()),
-      );
-    }
+    const term = this.searchText().toLowerCase();
+    if (!term) return this.allProducts();
+
+    return this.allProducts().filter(
+      (p) => p.name.toLowerCase().includes(term) || p.code.toString().includes(term),
+    );
   });
 
   ngOnInit(): void {
@@ -48,17 +37,23 @@ export class ProductList implements OnInit {
   }
 
   private loadProducts() {
-    this.loadning.set(true);
+    this.loading.set(true);
     this.productService.getAllProducts().subscribe({
       next: (data) => {
-        this.loadning.set(false);
+        this.loading.set(false);
         this.allProducts.set(data);
       },
       error: (error) => {
-        this.loadning.set(false);
-        console.error('Ocurrió un error al Listar los productos', error);
+        this.loading.set(false);
+        console.error('Error al listar los productos', error);
       },
     });
+  }
+
+  // Método unificado para agregar al carrito
+  protected addToCart(product: Product) {
+    this.cartService.addToCart(product);
+    alert(`¡${product.name} agregado al carrito!`);
   }
 
   onView(product: Product) {
@@ -66,10 +61,11 @@ export class ProductList implements OnInit {
   }
 
   onDelete(code: number) {
-    //Verificar si está seguro em eliminar
-    if (confirm(`Está Seguro en Eliminar este Producto ${code}?`)) {
-      this.productService.deleteProduct(code);
-      this.loadProducts();
+    if (confirm(`¿Está seguro de eliminar el producto con código ${code}?`)) {
+      this.productService.deleteProduct(code).subscribe({
+        next: () => this.loadProducts(),
+        error: (err) => console.error('Error al eliminar', err),
+      });
     }
   }
 }

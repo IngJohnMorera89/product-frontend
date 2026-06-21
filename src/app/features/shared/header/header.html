@@ -36,7 +36,10 @@
           >
             🛒
             <span
-              >Total: <strong>{{ totalCompra() | currency: 'COP' : 'symbol-narrow' }}</strong></span
+              >Total:
+              <strong>{{
+                cartService.totalCartPrice() | currency: 'COP' : 'symbol-narrow' : '1.0-0'
+              }}</strong></span
             >
           </a>
 

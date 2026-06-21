@@ -20,10 +20,14 @@
           @for (item of cartItems(); track item.product.code) {
             <tr>
               <td class="align-middle">{{ item.product.name }}</td>
-              <td class="align-middle">{{ item.product.price | currency: 'COP' }}</td>
+              <td class="align-middle">
+                {{ item.product.price | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+              </td>
               <td class="align-middle">{{ item.quantity }}</td>
               <td class="align-middle fw-bold text-success">
-                {{ item.product.price * item.quantity | currency: 'COP' }}
+                {{
+                  item.product.price * item.quantity | currency: 'COP' : 'symbol-narrow' : '1.0-0'
+                }}
               </td>
             </tr>
           }
@@ -31,10 +35,20 @@
       </table>
     </div>
 
-    <div class="d-flex justify-content-end align-items-center mt-4 gap-3">
-      <h3 class="text-white">Total: {{ total() | currency: 'COP' }}</h3>
-      <button class="btn btn-danger" (click)="clearCart()">Vaciar Carrito</button>
-      <button class="btn btn-success">Finalizar Compra</button>
+    <div
+      class="mt-4 p-4 border-top border-secondary d-flex justify-content-between align-items-center bg-dark rounded"
+    >
+      <button class="btn btn-outline-danger" (click)="clearCart()">
+        <i class="bi bi-trash"></i> Vaciar Carrito
+      </button>
+
+      <div class="d-flex align-items-center gap-4">
+        <h3 class="text-white mb-0">
+          Total: <strong>{{ total() | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}</strong>
+        </h3>
+
+        <button class="btn btn-primary btn-lg px-4" (click)="onCheckout()">Finalizar Compra</button>
+      </div>
     </div>
   }
 </main>

@@ -1,97 +1,32 @@
-<main class="products-container mt-4">
-  <div class="products-header text-center mb-4">
-    <h2 class="products-title">Catálogo de Productos</h2>
-    <p class="products-subtitle">Descubre nuestras mejores ofertas</p>
-  </div>
+<main class="container py-4">
+  <h2 class="mb-4">Catálogo de Productos</h2>
 
-  <div class="col-lg-10 col-xl-9 mx-auto">
-    <div
-      class="d-flex flex-column flex-md-row justify-content-between align-items-md-start mb-3 gap-3"
-    >
-      <div class="flex-grow-1" style="max-width: 400px">
-        <input
-          class="form-control search-input"
-          placeholder="🔍 Filtrar por nombre o código..."
-          [(ngModel)]="searchText"
-        />
-        <small class="search-info text-muted mt-1 d-block">
-          Resultados para: <strong>{{ searchText() || 'Todos' }}</strong>
-        </small>
-      </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    @for (product of products(); track product.code) {
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <img
+            [src]="product.imageUrl"
+            class="card-img-top"
+            [alt]="product.name"
+            style="height: 200px; object-fit: cover"
+          />
 
-      <div>
-        <button class="btn btn-gradient fw-bold" routerLink="/products/new">
-          + Nuevo Producto
-        </button>
-      </div>
-    </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text text-muted small">{{ product.description }}</p>
 
-    @if (loadning()) {
-      <div class="text-center py-5">
-        <div class="spinner-border text-info" role="status">
-          <span class="visually-hidden">Cargando...</span>
+            <div class="mt-auto">
+              <h4 class="text-primary">
+                {{ product.price | currency: 'COP' : 'symbol' : '1.0-0' }}
+              </h4>
+
+              <button class="btn btn-success w-100 mt-2" (click)="addToCart(product)">
+                <i class="bi bi-cart-plus"></i> Agregar al carrito
+              </button>
+            </div>
+          </div>
         </div>
-        <p class="text-muted mt-3">Cargando productos...</p>
-      </div>
-    } @else if (products().length === 0) {
-      <div class="alert-empty">
-        <p class="text-muted">No hay productos disponibles con el filtro aplicado.</p>
-      </div>
-    } @else {
-      <div class="table-responsive">
-        <table class="table products-table">
-          <thead>
-            <tr>
-              <th class="text-info fw-bold">Código</th>
-              <th class="text-info fw-bold">Nombre</th>
-              <th class="text-info fw-bold">Precio</th>
-              <th class="text-info fw-bold text-center">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (product of products(); track product.code) {
-              <tr class="product-row">
-                <td class="fw-bold text-info">{{ product.code }}</td>
-                <td class="text-dark fw-medium">{{ product.name }}</td>
-                <td class="fw-bold text-success">
-                  {{ product.price | currency: 'COP' : 'symbol-narrow' }}
-                </td>
-                <td>
-                  <div class="d-flex justify-content-center gap-2">
-                    <button
-                      class="btn btn-sm btn-outline-primary"
-                      [routerLink]="['/products/edit', product.code]"
-                      title="Editar"
-                    >
-                      Editar
-                    </button>
-                    <button
-                      class="btn btn-sm btn-outline-info"
-                      [routerLink]="['/products', product.code]"
-                      title="Ver detalles"
-                    >
-                      Ver
-                    </button>
-                    <button
-                      class="btn btn-sm btn-outline-danger"
-                      (click)="onDelete(product.code)"
-                      title="Eliminar"
-                    >
-                      Eliminar
-                    </button>
-                    <button
-                      class="btn btn-sm btn-outline-success"
-                      (click)="onAddToCart(product)"
-                      title="Agregar al carrito"
-                    >
-                      🛒
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
       </div>
     }
   </div>
