@@ -182,6 +182,14 @@ export class ProductService {
         imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX6Fj8wbE9mWjpm9F4I9aUl753yDOmjvimtG4dz-VKGA&s',
       },
+      {
+        code: 21,
+        name: 'Iphone 17 Pro Max',
+        price: 7000000,
+        description: 'Smartphone de última generación.',
+        imageUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI4-KyJRVd4zfY8Kr5Bi5xf_nj2H3f7mgEeLuFPR_lqw&s=10',
+      },
     ];
   }
 
