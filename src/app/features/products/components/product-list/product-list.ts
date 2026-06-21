@@ -9,7 +9,7 @@ import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CurrencyPipe, FormsModule],
+  imports: [CurrencyPipe, RouterLink, FormsModule],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
